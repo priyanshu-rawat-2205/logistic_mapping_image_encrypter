@@ -1,4 +1,5 @@
 from PIL import Image
+import argparse
 
 def getImageMatrix(imageName):
     im = Image.open(imageName) 
@@ -190,11 +191,32 @@ def LogisticDecryption(imageName, key):
 
 # example usage
 if __name__ == "__main__":
-    input_image_path = "images/cat2.jpeg"
+
+
+    parser = argparse.ArgumentParser(
+                    prog='LOGENC',
+                    description='encrypt images',
+                    epilog='dev')
+    
+    parser.add_argument('image_path', help='enter the path of image')
+    parser.add_argument('-e', '--encrypt', help='enter the key for encryption')
+    parser.add_argument('-d', '--decrypt', help='enter the key for decryption')
+    args = parser.parse_args()
+    # print(args.encrypt)
+
+    # input_image_path = 'cat.jpg'
+    input_image_path = args.image_path
     key = "test case asdd"  # Use a secret key for encryption/decryption
+    false_key = 'asdasdasdasd'
 
     #Encrypt the original image and save as 'input_image_LogisticEnc.png'
-    LogisticEncryption(input_image_path, key)
+    # LogisticEncryption(input_image_path, key)
+    if args.encrypt:
+        LogisticEncryption(input_image_path, args.encrypt)
+
 
     #Decrypt the encrypted image and save as 'input_image_LogisticDec.png'
-    LogisticDecryption("images/cat2_LogisticEnc.png", key)
+    # LogisticDecryption("cat_LogisticEnc.png", false_key)
+    if args.decrypt:
+        LogisticDecryption(args.image_path, args.decrypt)
+
