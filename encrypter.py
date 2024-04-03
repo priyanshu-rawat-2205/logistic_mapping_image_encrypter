@@ -175,7 +175,7 @@ class LogisticMapping():
             for height in range(int(image_size[1])):
                     row.append((pix[width,height]))
             image_matrix.append(row)
-        return image_matrix, image_size[0], image_size[1],color
+        return image_matrix, image_size[0], image_size[1], color
 
 
     def getImageMatrix(self, imageName):
